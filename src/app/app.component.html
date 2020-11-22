@@ -3,15 +3,32 @@
     <app-cockpit
       (serverCreated)="onServerCreated($event)"
       (bpCreated)="onBlueprintCreated($event)"
-    ></app-cockpit>
+    >
+    </app-cockpit>
   </div>
-  <hr>
+  <hr />
   <div class="row">
-    <div class="col-xs-12"> 
-      <app-server-element 
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onChangeFirstElement()">
+        Change First Element
+      </button>
+      <button class="btn btn-primary" (click)="onDestroyFirstElement()">
+        Destroy First Element
+      </button>
+      <app-server-element
         *ngFor="let serverElement of getServerElements()"
-        [srvElement]="serverElement"
-      ></app-server-element>
+        [srvName]="serverElement.name"
+      >
+        <!-- [srvElement]="serverElement" -->
+        <p #contentParagraph>
+          <strong *ngIf="serverElement.type === 'server'" style="color: red">
+            {{ serverElement.content }}
+          </strong>
+          <em *ngIf="serverElement.type === 'blueprint'">
+            {{ serverElement.content }}
+          </em>
+        </p>
+      </app-server-element>
     </div>
   </div>
 </div>

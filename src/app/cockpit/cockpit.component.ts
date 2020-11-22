@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-cockpit',
@@ -15,42 +15,48 @@ export class CockpitComponent implements OnInit {
   private blueprintCreated: EventEmitter<{ name: string, content: string; }> =
     new EventEmitter<{ name: string, content: string }>();
  
-  private newServerName:string = null;
-  private newServerContent:string = null;
+  // private newServerName:string = null;
+  // private newServerContent: string = null;
+  
+  @ViewChild('serverContentInput')
+  private serverContentInput: ElementRef = null;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }  
+  ngOnInit(): void { }  
   
-  onAddServer() {
+  onAddServer(serverName:HTMLInputElement) { 
     this.serverCreated.emit({
-      name: this.newServerName ? this.newServerName : 'BBBBB' ,
-      content: this.newServerContent ? this.newServerContent : 'AAAAA'
+      name: serverName.value ? serverName.value : 'BBBBB' ,
+      // content: this.newServerContent ? this.newServerContent : 'AAAAA'
+      content: this.serverContentInput.nativeElement.value ?
+        this.serverContentInput.nativeElement.value : 'AAAAA'
     });
   }
 
-  onAddBlueprint() {
+  onAddBlueprint(serverName:HTMLInputElement) {
     this.blueprintCreated.emit({
-      name: this.newServerName ? this.newServerName : 'BBBBB' ,
-      content: this.newServerContent ? this.newServerContent : 'AAAAA'
+      name: serverName.value ? serverName.value : 'BBBBB' ,
+      // content: this.newServerContent ? this.newServerContent : 'AAAAA'
+      content: this.serverContentInput.nativeElement.value ?
+        this.serverContentInput.nativeElement.value : 'AAAAA'
     });
   }
 
-  public getNewServerNmae(): string {
-    return this.newServerName;
-  }
+  // public getNewServerNmae(): string {
+  //   return this.newServerName;
+  // }
 
-  public setNewServerNmae(newServerName: string): void {
-    this.newServerName = newServerName;
-  }
+  // public setNewServerNmae(newServerName: string): void {
+  //   this.newServerName = newServerName;
+  // }
 
-  public getNewServerContent(): string {
-    return this.newServerContent;
-  }
+  // public getNewServerContent(): string {
+  //   return this.newServerContent;
+  // }
 
-  public setNewServerContent(newServerContent: string): void {
-    this.newServerContent = newServerContent;
-  }
+  // public setNewServerContent(newServerContent: string): void {
+  //   this.newServerContent = newServerContent;
+  // }
   
 }

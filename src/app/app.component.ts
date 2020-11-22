@@ -8,10 +8,10 @@ import { stringify } from 'querystring';
 })
 export class AppComponent {
 
-  private serverElements: { type: string, name: string, content: string; }[] = null;
+  private serverElements: { type: string, name: string, content: string }[] = null;
   
   public constructor() {
-    this.serverElements = new Array<{ type: string, name: string, content: string}>();
+    this.serverElements = new Array<{ type: string, name: string, content: string }>();
   }
 
   public onServerCreated(serverElement:{name: string, content: string }): void {
@@ -30,8 +30,20 @@ export class AppComponent {
     });
   }
  
-  public getServerElements(): { type: string, name: string, content: string}[] {
+  public getServerElements(): { type: string, name: string, content: string }[] {
     return this.serverElements;
+  }
+ 
+  public setServerElements(serverElements: { type: string, name: string, content: string }[]):void {
+    this.serverElements = serverElements;
+  }
+
+  public onChangeFirstElement() {
+    this.getServerElements()[0].name = "CHANGED";
+  }
+
+  public onDestroyFirstElement() {
+    this.getServerElements().splice(0, 1);
   }
   
 }

@@ -1,12 +1,8 @@
 <div class="col-xs-12">
-  <div
-    class="panel panel-default" >
-    <div class="panel-heading">{{ getElement().name }}</div>
+  <div class="panel panel-default">
+    <div class="panel-heading" #headerHook>{{ name }}</div>
     <div class="panel-body">
-      <p>
-        <strong *ngIf="getElement().type === 'server'" style="color: red">{{ getElement().content }}</strong>
-        <em *ngIf="getElement().type === 'blueprint'">{{ getElement().content }}</em>
-      </p>
+      <ng-content></ng-content>
     </div>
   </div>
 </div>
